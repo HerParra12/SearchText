@@ -11,7 +11,6 @@ public class AplMain {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			new Ventana();
-
 		} catch (Exception e) {}
 	}
 	

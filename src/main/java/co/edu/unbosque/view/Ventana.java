@@ -4,11 +4,13 @@ import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
@@ -21,7 +23,8 @@ public class Ventana extends JFrame{
 	private JButton btnImportFile, btnSearch, btnKMB, btnBM;
 	private JTextField text;
 	private JTextArea showText;
-	private JLabel lblEnterText;
+	private JLabel lblEnterText, select;
+	private JRadioButton radioKMB, radioBM;
 	
 	
 	public Ventana() {
@@ -44,22 +47,46 @@ public class Ventana extends JFrame{
 		btnImportFile.setEnabled(true);
 		panelMain.add(btnImportFile);
 		
-		btnKMB = new JButton("KMP");
-		btnKMB.setBounds(10,250,70,40);
-		btnKMB.setFont(new Font("Century Gothic",Font.BOLD, 12));
-		btnKMB.setActionCommand("KMP");
-		btnKMB.setEnabled(true);
-		panelMain.add(btnKMB);
+//		btnKMB = new JButton("KMP");
+//		btnKMB.setBounds(10,250,70,40);
+//		btnKMB.setFont(new Font("Century Gothic",Font.BOLD, 12));
+//		btnKMB.setActionCommand("KMP");
+//		btnKMB.setEnabled(true);
+//		panelMain.add(btnKMB);
+//		
+//		btnBM = new JButton("BM");
+//		btnBM.setBounds(740,250,70,40);
+//		btnBM.setFont(new Font("Century Gothic",Font.BOLD, 12));
+//		btnBM.setActionCommand("BM");
+//		btnBM.setEnabled(true);
+//		panelMain.add(btnBM);
 		
-		btnBM = new JButton("BM");
-		btnBM.setBounds(740,250,70,40);
-		btnBM.setFont(new Font("Century Gothic",Font.BOLD, 12));
-		btnBM.setActionCommand("BM");
-		btnBM.setEnabled(true);
-		panelMain.add(btnBM);
+		select = new JLabel("Select the algorithm that you will use:");
+		select.setBounds(530, 450, 300, 35);
+		select.setFont(new Font("Roboto",Font.BOLD, 13));
+		select.setForeground(Color.WHITE);
+		panelMain.add(select);
+		
+		radioKMB = new JRadioButton("KMP");
+		radioKMB.setBounds(530,480,100,35);
+		radioKMB.setBackground(null);
+		radioKMB.setForeground(Color.white);
+		radioKMB.setFont(new Font("Century Gothic", Font.BOLD, 12));
+		panelMain.add(radioKMB);
+
+		radioBM = new JRadioButton("BM");
+		radioBM.setBounds(530,510,100,35);
+		radioBM.setBackground(null);
+		radioBM.setForeground(Color.white);
+		radioBM.setFont(new Font("Century Gothic", Font.BOLD, 12));
+		panelMain.add(radioBM);
+		
+		ButtonGroup optionAlgorithm = new ButtonGroup();
+		optionAlgorithm.add(radioKMB);
+		optionAlgorithm.add(radioBM);
 		
 		showText = new JTextArea();
-		showText.setBounds(110,80,600,350);
+		showText.setBounds(30,80,770,350);
 		showText.setLineWrap(true);
 		showText.setBackground(null);
 		showText.setEditable(false);
@@ -70,20 +97,20 @@ public class Ventana extends JFrame{
 		panelMain.add(showText);
 
 		text = new JTextField();
-		text.setBounds(260, 450, 300, 35);
+		text.setBounds(180, 450, 300, 35);
 		text.setFont(new Font("Roboto",Font.LAYOUT_LEFT_TO_RIGHT, 12));
 		text.setBorder(BorderFactory.createLineBorder(Color.gray));
 		panelMain.add(text);
 		
 		lblEnterText = new JLabel("Type the character or text: ");
-		lblEnterText.setBounds(90, 450, 300, 35);
+		lblEnterText.setBounds(10, 450, 300, 35);
 		lblEnterText.setFont(new Font("Roboto",Font.BOLD, 13));
 		lblEnterText.setForeground(Color.WHITE);
 		panelMain.add(lblEnterText);
 
 
 		btnSearch = new JButton("Search");
-		btnSearch.setBounds(365,500,90,30);
+		btnSearch.setBounds(285,500,90,30);
 		btnSearch.setFont(new Font("Century Gothic",Font.BOLD, 12));
 		btnSearch.setActionCommand("SEARCH");
 		btnSearch.setEnabled(true);
@@ -162,6 +189,46 @@ public class Ventana extends JFrame{
 
 	public void setShowText(JTextArea showText) {
 		this.showText = showText;
+	}
+
+
+	public JLabel getLblEnterText() {
+		return lblEnterText;
+	}
+
+
+	public void setLblEnterText(JLabel lblEnterText) {
+		this.lblEnterText = lblEnterText;
+	}
+
+
+	public JLabel getSelect() {
+		return select;
+	}
+
+
+	public void setSelect(JLabel select) {
+		this.select = select;
+	}
+
+
+	public JRadioButton getRadioKMB() {
+		return radioKMB;
+	}
+
+
+	public void setRadioKMB(JRadioButton radioKMB) {
+		this.radioKMB = radioKMB;
+	}
+
+
+	public JRadioButton getRadioBM() {
+		return radioBM;
+	}
+
+
+	public void setRadioBM(JRadioButton radioBM) {
+		this.radioBM = radioBM;
 	}
 	
 	
