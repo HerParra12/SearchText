@@ -18,7 +18,6 @@ public class Modelo {
 		return counter + "," + builder.toString();
 	}
 	
-	
 	public String bmAlgorithm(String text, String search) {
 		StringBuilder builder = new StringBuilder();
 		int chars [] = new int [256];
@@ -49,13 +48,6 @@ public class Modelo {
 		return -1;
 	}
 	
-	public void setValues(String text, int chars []) {
-		for(int i = 0; i < chars.length; i++)
-			chars[i]--;
-		for(int i = 0; i < text.length(); i++)
-			chars[text.charAt(i)] = i;
-	}
-	
 	public int bm(String text, String search, int chars [], int index) {
 		int skip = 0;
 		for(int i = index; i < text.length() - search.length(); i += skip) {
@@ -69,5 +61,12 @@ public class Modelo {
 			if(skip == 0) return i;
 		}
 		return -1;
+	}
+	
+	public void setValues(String text, int chars []) {
+		for(int i = 0; i < chars.length; i++)
+			chars[i]--;
+		for(int i = 0; i < text.length(); i++)
+			chars[text.charAt(i)] = i;
 	}
 }
