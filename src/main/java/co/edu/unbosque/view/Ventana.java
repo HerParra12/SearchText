@@ -1,6 +1,7 @@
 package co.edu.unbosque.view;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Font;
 import java.io.File;
 
@@ -9,7 +10,6 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
@@ -18,13 +18,16 @@ import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+
+
 public class Ventana extends JFrame{
 
+	private PanelFondo panelFondo;
 	private JPanel panelMain = new JPanel();
-	private JButton btnImportFile, btnSearch, btnKMB, btnBM;
+	private JButton btnImportFile, btnSearch;
 	private JTextField text;
 	private JTextArea showText;
-	private JLabel lblEnterText, select;
+	private JLabel lblEnterText, lblSelect;
 	private JRadioButton radioKMB, radioBM;
 	
 	
@@ -41,38 +44,28 @@ public class Ventana extends JFrame{
 		setLocationRelativeTo(null);
 		setVisible(true);
 
+		
+		
 		btnImportFile = new JButton("Import the file (txt)");
 		btnImportFile.setBounds(320,20,170,35);
 		btnImportFile.setFont(new Font("Century Gothic",Font.BOLD, 12));
 		btnImportFile.setActionCommand("IMPORTFILE");
 		btnImportFile.setEnabled(true);
 		panelMain.add(btnImportFile);
-		
-//		btnKMB = new JButton("KMP");
-//		btnKMB.setBounds(10,250,70,40);
-//		btnKMB.setFont(new Font("Century Gothic",Font.BOLD, 12));
-//		btnKMB.setActionCommand("KMP");
-//		btnKMB.setEnabled(true);
-//		panelMain.add(btnKMB);
-//		
-//		btnBM = new JButton("BM");
-//		btnBM.setBounds(740,250,70,40);
-//		btnBM.setFont(new Font("Century Gothic",Font.BOLD, 12));
-//		btnBM.setActionCommand("BM");
-//		btnBM.setEnabled(true);
-//		panelMain.add(btnBM);
-		
-		select = new JLabel("Select the algorithm that you will use:");
-		select.setBounds(530, 450, 300, 35);
-		select.setFont(new Font("Roboto",Font.BOLD, 13));
-		select.setForeground(Color.WHITE);
-		panelMain.add(select);
+
+		lblSelect = new JLabel("Select the algorithm that you will use:");
+		lblSelect.setBounds(530, 450, 300, 35);
+		lblSelect.setFont(new Font("Roboto",Font.BOLD, 13));
+		lblSelect.setForeground(Color.WHITE);
+		lblSelect.setVisible(false);
+		panelMain.add(lblSelect);
 		
 		radioKMB = new JRadioButton("KMP");
 		radioKMB.setBounds(530,480,100,35);
 		radioKMB.setBackground(null);
 		radioKMB.setForeground(Color.white);
 		radioKMB.setFont(new Font("Century Gothic", Font.BOLD, 12));
+		radioKMB.setVisible(false);
 		panelMain.add(radioKMB);
 
 		radioBM = new JRadioButton("BM");
@@ -80,6 +73,7 @@ public class Ventana extends JFrame{
 		radioBM.setBackground(null);
 		radioBM.setForeground(Color.white);
 		radioBM.setFont(new Font("Century Gothic", Font.BOLD, 12));
+		radioBM.setVisible(false);
 		panelMain.add(radioBM);
 		
 		ButtonGroup optionAlgorithm = new ButtonGroup();
@@ -100,12 +94,14 @@ public class Ventana extends JFrame{
 		text.setBounds(180, 450, 300, 35);
 		text.setFont(new Font("Roboto",Font.LAYOUT_LEFT_TO_RIGHT, 12));
 		text.setBorder(BorderFactory.createLineBorder(Color.gray));
+		text.setVisible(false);
 		panelMain.add(text);
 		
 		lblEnterText = new JLabel("Type the character or text: ");
 		lblEnterText.setBounds(10, 450, 300, 35);
 		lblEnterText.setFont(new Font("Roboto",Font.BOLD, 13));
 		lblEnterText.setForeground(Color.WHITE);
+		lblEnterText.setVisible(false);
 		panelMain.add(lblEnterText);
 
 
@@ -113,11 +109,16 @@ public class Ventana extends JFrame{
 		btnSearch.setBounds(285,500,90,30);
 		btnSearch.setFont(new Font("Century Gothic",Font.BOLD, 12));
 		btnSearch.setActionCommand("SEARCH");
-		btnSearch.setEnabled(true);
+		btnSearch.setVisible(false);
 		panelMain.add(btnSearch);
 		
         Border bordejpanel = new TitledBorder(new EtchedBorder(), "Search Text");
         panelMain.setBorder(bordejpanel);
+        
+       
+//        Container contentpane = getContentPane(); // SE AGREGA LA IMAGEN DE PRESENTACI�N
+//		panelFondo = new PanelFondo();
+//		contentpane.add(panelFondo);
 
 	}
 	
@@ -159,26 +160,6 @@ public class Ventana extends JFrame{
 	}
 
 
-	public JButton getBtnKMB() {
-		return btnKMB;
-	}
-
-
-	public void setBtnKMB(JButton btnKMB) {
-		this.btnKMB = btnKMB;
-	}
-
-
-	public JButton getBtnBM() {
-		return btnBM;
-	}
-
-
-	public void setBtnBM(JButton btnBM) {
-		this.btnBM = btnBM;
-	}
-
-
 	public JTextField getText() {
 		return text;
 	}
@@ -210,12 +191,12 @@ public class Ventana extends JFrame{
 
 
 	public JLabel getSelect() {
-		return select;
+		return lblSelect;
 	}
 
 
 	public void setSelect(JLabel select) {
-		this.select = select;
+		this.lblSelect = select;
 	}
 
 
@@ -236,6 +217,14 @@ public class Ventana extends JFrame{
 
 	public void setRadioBM(JRadioButton radioBM) {
 		this.radioBM = radioBM;
+	}
+
+	public JLabel getLblSelect() {
+		return lblSelect;
+	}
+
+	public void setLblSelect(JLabel lblSelect) {
+		this.lblSelect = lblSelect;
 	}
 	
 	

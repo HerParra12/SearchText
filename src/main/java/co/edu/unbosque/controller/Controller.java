@@ -31,7 +31,18 @@ public class Controller implements ActionListener{
 		String comand = e.getActionCommand();
 
 		if(comand.equals("IMPORTFILE")) {
-//			persistence.contentText(comand)
+			String text = "";
+			text = persistence.contentText(view.connectFileChooser().getAbsolutePath());
+			view.getShowText().setText(text);
+			
+			view.getText().setVisible(true);
+			view.getBtnSearch().setVisible(true);
+			view.getRadioBM().setVisible(true);
+			view.getRadioKMB().setVisible(true);
+			view.getLblEnterText().setVisible(true);
+			view.getLblSelect().setVisible(true);
+
+
 			
 		}
 		
