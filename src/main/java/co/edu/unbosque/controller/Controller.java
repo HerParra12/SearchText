@@ -28,8 +28,12 @@ public class Controller implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		
-		
+		String comand = e.getActionCommand();
+
+		if(comand.equals("IMPORTFILE")) {
+//			persistence.contentText(comand)
+			
+		}
 		
 		
 	}

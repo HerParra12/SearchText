@@ -2,6 +2,7 @@ package co.edu.unbosque.view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.io.File;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -93,7 +94,6 @@ public class Ventana extends JFrame{
 		showText.setBorder(BorderFactory.createLineBorder(Color.white));
 		showText.setForeground(Color.WHITE);
 		showText.setFont(new Font("Century Gothic", Font.BOLD, 12));
-		showText.setText("Vamos con otra prueba");
 		panelMain.add(showText);
 
 		text = new JTextField();
@@ -119,6 +119,13 @@ public class Ventana extends JFrame{
         Border bordejpanel = new TitledBorder(new EtchedBorder(), "Search Text");
         panelMain.setBorder(bordejpanel);
 
+	}
+	
+	public File connectFileChooser() {
+		FileChooser tf = new FileChooser();
+		File fileChooser = tf.checkFile();
+		System.out.println("The file selected is: " + fileChooser.getName());
+		return fileChooser;
 	}
 
 
