@@ -20,10 +20,10 @@ public class Controller implements ActionListener{
 	}
 	
 	public void assigningListeners() {
-		view.getBtnImportFile().addActionListener(this);
-		view.getBtnSearch().addActionListener(this);
-		view.getRadioBM().addActionListener(this);
-		view.getRadioKMB().addActionListener(this);
+		view.getPanelMain().getBtnImportFile().addActionListener(this);
+		view.getPanelMain().getBtnSearch().addActionListener(this);
+		view.getPanelMain().getRadioBM().addActionListener(this);
+		view.getPanelMain().getRadioKMB().addActionListener(this);
 		
 	}
 
@@ -33,14 +33,14 @@ public class Controller implements ActionListener{
 		if(comand.equals("IMPORTFILE")) {
 			String text = "";
 			text = persistence.contentText(view.connectFileChooser().getAbsolutePath());
-			view.getShowText().setText(text);
+			view.getPanelMain().getShowText().setText(text);
 			
-			view.getText().setVisible(true);
-			view.getBtnSearch().setVisible(true);
-			view.getRadioBM().setVisible(true);
-			view.getRadioKMB().setVisible(true);
-			view.getLblEnterText().setVisible(true);
-			view.getLblSelect().setVisible(true);
+			view.getPanelMain().getText().setVisible(true);
+			view.getPanelMain().getBtnSearch().setVisible(true);
+			view.getPanelMain().getRadioBM().setVisible(true);
+			view.getPanelMain().getRadioKMB().setVisible(true);
+			view.getPanelMain().getLblEnterText().setVisible(true);
+			view.getPanelMain().getLblSelect().setVisible(true);
 
 
 			
