@@ -3,8 +3,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.io.File;
-
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -17,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Highlighter;
 import javax.swing.text.Highlighter.HighlightPainter;
 
@@ -33,7 +32,6 @@ public class PanelPrincipal extends JPanel{
 	private HighlightPainter paint;
 	
 	PanelPrincipal(){
-		
         setBackground();
 		setLayout(null);
 		setForeground(null);
@@ -71,7 +69,6 @@ public class PanelPrincipal extends JPanel{
 		ButtonGroup optionAlgorithm = new ButtonGroup();
 		optionAlgorithm.add(radioKMB);
 		optionAlgorithm.add(radioBM);
-	
 		
 		showText = new JTextArea();
 		showText.setBounds(30,80,770,350);
@@ -97,7 +94,6 @@ public class PanelPrincipal extends JPanel{
 		lblEnterText.setVisible(false);
 		add(lblEnterText);
 
-
 		btnSearch = new JButton("Search");
 		btnSearch.setBounds(285,500,90,30);
 		btnSearch.setFont(new Font("Century Gothic",Font.BOLD, 12));
@@ -107,19 +103,20 @@ public class PanelPrincipal extends JPanel{
 		
         Border bordejpanel = new TitledBorder(new EtchedBorder(), "Search Text");
         setBorder(bordejpanel);	
+        
+        high = new DefaultHighlighter();
+        paint = new DefaultHighlighter.DefaultHighlightPainter(Color.gray);
+        showText.setHighlighter(high);
 	}
 	
+	
 	public String [] estados(String file, String search) {
-		String estados [] = new String [2];
 		boolean kmp = radioKMB.isSelected();
 		boolean bm = radioBM.isSelected();
-		if(!kmp && !bm) {
+		if(!kmp && !bm) 
 			return null;
-		}else if(new File(file) != null) {
-			estados[0] = kmp? "KMP" : "BM";
-			estados[1] = search;	
-		}
-		return estados;
+		else 
+			return new String [] {kmp? "KMP": "BM", search};
 	}
 	
 	public void paintText(String chars [], int size) {
@@ -129,17 +126,14 @@ public class PanelPrincipal extends JPanel{
 				high.addHighlight(Integer.parseInt(chars[i]), Integer.parseInt(chars[i]) +size, paint);
 				showText.setCaretPosition(Integer.parseInt(chars[i]) +size);
 			}
-		}catch(Exception error) {
-			error.printStackTrace();
-		}
+		}catch(Exception error) {}
 	}
-	
 	
 	public void paintComponent(Graphics g) {
 		int width = getSize().width;
 		int height = getSize().height;
-		if (this.background != null) 
-			g.drawImage(this.background, 0, 0, width, height, null);
+		if (background != null) 
+			g.drawImage(background, 0, 0, width, height, null);
 		super.paintComponent(g);
 	}
 

@@ -19,11 +19,6 @@ public class FileChooser extends JPanel{
 		jf.setFileFilter(filter);
 	}
 	
-	/**
-	 * Se puede eliminar este while ya que es incomodo tener un JFileChooser cada vez que
-	 * no se selecciona un archivos
-	 * @return 
-	 */
 	public File checkFile() {
 		File f = jf.getSelectedFile();
 		while (f == null) {

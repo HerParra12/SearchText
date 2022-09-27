@@ -1,8 +1,6 @@
 package co.edu.unbosque.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
-
 import co.edu.unbosque.model.Modelo;
 import co.edu.unbosque.model.persistence.Persistencia;
 import co.edu.unbosque.view.Ventana;
@@ -24,8 +22,7 @@ public class Controller implements ActionListener{
 		view.getPanelMain().getBtnImportFile().addActionListener(this);
 		view.getPanelMain().getBtnSearch().addActionListener(this);
 		view.getPanelMain().getRadioBM().addActionListener(this);
-		view.getPanelMain().getRadioKMB().addActionListener(this);
-		
+		view.getPanelMain().getRadioKMB().addActionListener(this);	
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -40,35 +37,30 @@ public class Controller implements ActionListener{
 			view.getPanelMain().getRadioKMB().setVisible(true);
 			view.getPanelMain().getLblEnterText().setVisible(true);
 			view.getPanelMain().getLblSelect().setVisible(true);
-		}
-		/**
-		 * Seleccion el algoritmo a usar.
-		 */
-		if(comand.equals("SEARCH")) {
+		
+		}else if(comand.equals("SEARCH")) {
 			String search = view.getPanelMain().getText().getText();
 			text = persistence.contentText(view.getRuta());
 			if(!search.isEmpty()) {
 				String estados [] = view.getPanelMain().estados(view.getRuta(), search);
-				System.out.println("Estados = " + Arrays.toString(estados));
-				if(estados != null) {
-					paintText(text, estados[0], "nose");
-				}
+				if(estados != null) 
+					paintText(text, estados[0], search);
+				else 
+					view.warningMessage("Debes seleccionar un algoritmo");
 			}else {
-				System.out.println("Debe ingresar un texto a buscar.");
+				view.warningMessage("Debes ingresar un texto para buscar.");
 			}
+			view.getPanelMain().getText().setText("");
 		}
-		
 	}
 	
 	
-	public void paintText(String content, String algorithm, String search) {
-		System.out.println("content = " + content + ", algoritm = " + algorithm + ", search = " + search);
-		String chars [] = null;
+	private void paintText(String content, String algorithm, String search) {
+		String chars [];
 		if(algorithm.equals("KMP")) 
 			chars = model.kmpAlgorithm(content, search).split(",");
 		else 
 			chars = model.bmAlgorithm(content, search).split(",");
-		System.out.println(Arrays.toString(chars));
-		//view.getPanelMain().paintText(chars, search.length());
+		view.getPanelMain().paintText(chars, search.length());
 	}
 }

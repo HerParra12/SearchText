@@ -4,12 +4,6 @@ public class Modelo {
 
 	public Modelo() {}
 	
-	
-	public static void main(String[] args) {
-		Modelo model = new Modelo();
-		System.out.println("BM = "  + model.bmAlgorithm("esto es un texto de prueba para saber si esta funcionando bie", "e"));
-	}
-	
 	public String kmpAlgorithm(String text, String search) {
 		StringBuilder builder = new StringBuilder();
 		int nums [] = new int [search.length()];
@@ -56,10 +50,10 @@ public class Modelo {
 	}
 	
 	public int bm(String text, String search, int chars [], int index) {
-		int skip = 0;
+		int skip;
 		for(int i = index; i < text.length() - search.length(); i += skip) {
 			skip = 0;
-			for(int j = search.length() -1; j >= 0; i--) {
+			for(int j = search.length() -1; j >= 0; j--) {
 				if(search.charAt(j) != text.charAt(i + j)) {
 					skip = j - chars[text.charAt(i + j)];
 					skip = skip < 1? 1 : skip;

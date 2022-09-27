@@ -7,7 +7,6 @@ public class Persistencia {
 
 	public Persistencia() {}
 	
-	
 	public String contentText(String file) {
 		try {
 			return Files.readString(Paths.get(file), Charset.defaultCharset());
