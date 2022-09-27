@@ -1,23 +1,50 @@
+/**
+ * The package of the class
+ */
 package co.edu.unbosque.controller;
+/**
+ * The necessary imports to work the class
+ */
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import co.edu.unbosque.model.Modelo;
+import co.edu.unbosque.model.Algorithm;
 import co.edu.unbosque.model.persistence.Persistencia;
-import co.edu.unbosque.view.Ventana;
+import co.edu.unbosque.view.View;
 
+/**
+ * Class that connects the model with the view
+ * 
+ * @author Omar Santos, Hernan Alvarado, Kevin Pinzón
+ *
+ */
 public class Controller implements ActionListener{
 
-	private Modelo model;
+	/**
+	 * Variable of the class Algorithm
+	 */
+	private Algorithm model;
+	/**
+	 * Variable of the class Persistence
+	 */
 	private Persistencia persistence;
-	private Ventana view;
+	/**
+	 * Variable of the class View
+	 */
+	private View view;
 	
+	/**
+	 * Constructor of the class, it calls a Listeners method and instances the classes declared before
+	 */
 	public Controller() {
-		model = new Modelo();
+		model = new Algorithm();
 		persistence = new Persistencia();
-		view = new Ventana();
+		view = new View();
 		assigningListeners();
 	}
 	
+	/**
+	 * Method that assigns the buttons listeners of the view
+	 */
 	public void assigningListeners() {
 		view.getPanelMain().getBtnImportFile().addActionListener(this);
 		view.getPanelMain().getBtnSearch().addActionListener(this);
@@ -25,6 +52,9 @@ public class Controller implements ActionListener{
 		view.getPanelMain().getRadioKMB().addActionListener(this);	
 	}
 
+	/**
+	 * Method that connects the differents options of the view with the model. Also makes validations
+	 */
 	public void actionPerformed(ActionEvent e) {
 		String comand = e.getActionCommand();
 		String text = null;
@@ -37,6 +67,8 @@ public class Controller implements ActionListener{
 			view.getPanelMain().getRadioKMB().setVisible(true);
 			view.getPanelMain().getLblEnterText().setVisible(true);
 			view.getPanelMain().getLblSelect().setVisible(true);
+			view.getPanelMain().getRectangle().setVisible(true);
+			view.getPanelMain().getBarraSalida().setVisible(true);
 		
 		}else if(comand.equals("SEARCH")) {
 			String search = view.getPanelMain().getText().getText();
@@ -54,7 +86,13 @@ public class Controller implements ActionListener{
 		}
 	}
 	
-	
+	/**
+	 * Method that paints the character(s) solicited by the user, considering the algorithm selected
+	 * 
+	 * @param content String where the character(s) will be searched
+	 * @param algorithm String of the algorithm selected
+	 * @param search String of character(s) that will be painted
+	 */
 	private void paintText(String content, String algorithm, String search) {
 		String chars [];
 		if(algorithm.equals("KMP")) 

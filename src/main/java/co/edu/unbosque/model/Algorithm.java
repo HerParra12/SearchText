@@ -1,9 +1,27 @@
+/**
+ * The package of the class
+ */
 package co.edu.unbosque.model;
+/**
+ * Class where the algorithms KMP and BM are developed
+ * 
+ * @author Hernan Alvarado, Kevin Pinzón, Omar Santos
+ *
+ */
+public class Algorithm {
 
-public class Modelo {
-
-	public Modelo() {}
+	/**
+	 * Empty constructor of the class
+	 */	
+	public Algorithm() {}
 	
+	/**
+	 * Method that develops the search by the KMP algorithm
+	 * 
+	 * @param text String of the file imported
+	 * @param search String of the character(s) that will be finded
+	 * @return String of the character(s) that the user searched
+	 */
 	public String kmpAlgorithm(String text, String search) {
 		StringBuilder builder = new StringBuilder();
 		int nums [] = new int [search.length()];
@@ -19,6 +37,13 @@ public class Modelo {
 		return counter + "," + builder.toString();
 	}
 	
+	/**
+	 * Method that develops the search by the KMP algorithm
+	 * 
+	 * @param text String of the file imported
+	 * @param search String of the character(s) that will be finded
+	 * @return String of the character(s) that the user searched
+	 */
 	public String bmAlgorithm(String text, String search) {
 		StringBuilder builder = new StringBuilder();
 		int chars [] = new int [256];
@@ -34,6 +59,15 @@ public class Modelo {
 		return counter + "," + builder.toString();
 	}
 	
+	/**
+	 * Method that searches the position of the character(s) requiered by the user
+	 * 
+	 * @param text String of the file imported
+	 * @param search String of the character(s) that will be finded
+	 * @param nums Unidimensional array that contains the positions of the searches
+	 * @param index Initial position to make the search
+	 * @return Integer of the position of what the user searched
+	 */
 	public int kmp(String text, String search, int nums [], int index) {
 		int k = 0;
 		while(index < text.length() && k < search.length()) {
@@ -49,6 +83,15 @@ public class Modelo {
 		return -1;
 	}
 	
+	/**
+	 * Method that searches the position of the character(s) requiered by the user
+	 * 
+	 * @param text String of the file imported
+	 * @param search String of the character(s) that will be finded
+	 * @param chars Unidimensional array that contains the positions of the searches
+	 * @param index Initial position to make the search
+	 * @return Integer of the position of what the user searched
+	 */
 	public int bm(String text, String search, int chars [], int index) {
 		int skip;
 		for(int i = index; i < text.length() - search.length(); i += skip) {
@@ -65,6 +108,13 @@ public class Modelo {
 		return -1;
 	}
 	
+	/**
+	 * Method that determines which character(s) are inside the search, based on the characters in the ASCII table. 
+	 * In order to take them into account when performing the search
+	 * 
+	 * @param text String with the search that will be done
+	 * @param chars Unidimensional array which contains the indices of the matches
+	 */
 	public void setValues(String text, int chars []) {
 		for(int i = 0; i < chars.length; i++)
 			chars[i]--;
@@ -72,6 +122,13 @@ public class Modelo {
 			chars[text.charAt(i)] = i;
 	}
 	
+	/**
+	 * Method that modifies the initial positions of the characters, in case there are repeated cases inside the initial search 
+	 * 
+	 * @param content String of the search that will be done
+	 * @param nums Unidimensional array of the search length
+	 * @return The modified position 
+	 */
 	public int [] nextPosition(String content, int nums []) {
 		nums[0]--;
 		int i = -1;
