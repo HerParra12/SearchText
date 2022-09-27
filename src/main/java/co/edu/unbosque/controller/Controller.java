@@ -74,9 +74,9 @@ public class Controller implements ActionListener{
 			String search = view.getPanelMain().getText().getText();
 			text = persistence.contentText(view.getRuta());
 			if(!search.isEmpty()) {
-				String estados [] = view.getPanelMain().estados(view.getRuta(), search);
+				String estados = view.getPanelMain().estados();
 				if(estados != null) 
-					paintText(text, estados[0], search);
+					paintText(text, estados, search);
 				else 
 					view.warningMessage("Debes seleccionar un algoritmo");
 			}else {
@@ -99,6 +99,8 @@ public class Controller implements ActionListener{
 			chars = model.kmpAlgorithm(content, search).split(",");
 		else 
 			chars = model.bmAlgorithm(content, search).split(",");
+		view.getPanelMain().getLblCoincidences().setText("The quantity of coincidences is: " + (chars.length -1));
+		view.getPanelMain().getLblCoincidences().setVisible(true);
 		view.getPanelMain().paintText(chars, search.length());
 	}
 }

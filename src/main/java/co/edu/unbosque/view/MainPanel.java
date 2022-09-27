@@ -55,7 +55,7 @@ public class MainPanel extends JPanel {
 	/**
 	 * Variables indicatives of the text that will be showed in the program
 	 */
-	private JLabel lblEnterText, lblSelect;
+	private JLabel lblEnterText, lblSelect, lblCoincidences;
 	/**
 	 * Variables of the buttons to select the algorithm to search
 	 */
@@ -99,6 +99,13 @@ public class MainPanel extends JPanel {
 		lblSelect.setForeground(Color.WHITE);
 		lblSelect.setVisible(false);
 		add(lblSelect);
+		
+		lblCoincidences = new JLabel("The quantity of coincidences is: ");
+		lblCoincidences.setBounds(540, 20, 300, 35);
+		lblCoincidences.setFont(new Font("Roboto", Font.BOLD, 14));
+		lblCoincidences.setForeground(Color.WHITE);
+		lblCoincidences.setVisible(false);
+		add(lblCoincidences);
 
 		radioKMB = new JRadioButton("KMP");
 		radioKMB.setBounds(530, 480, 100, 35);
@@ -176,19 +183,18 @@ public class MainPanel extends JPanel {
 
 	/**
 	 * Method that searches in the file the character(s) selected
-	 * @deprecated
 	 * @param file   String of the file selected
 	 * @param search String of the character(s) that will be showed
 	 * @return An unidimensional array that already searched the character(s)
 	 *         requested
 	 */
-	public String[] estados(String file, String search) {
+	public String estados() {
 		boolean kmp = radioKMB.isSelected();
 		boolean bm = radioBM.isSelected();
 		if (!kmp && !bm)
 			return null;
 		else
-			return new String[] { kmp ? "KMP" : "BM", search };
+			return kmp? "KMP" : "BM";
 	}
 
 	/**
@@ -407,6 +413,22 @@ public class MainPanel extends JPanel {
 	 */
 	public void setBarraSalida(JScrollPane barraSalida) {
 		this.barraSalida = barraSalida;
+	}
+	
+	/**
+	 * Method that calls the label which indicates the quantity of repetitions of the search
+	 * @return The label of coincidences
+	 */
+	public JLabel getLblCoincidences() {
+		return lblCoincidences;
+	}
+	
+	/**
+	 * Method that sets the label which indicates the quantity of repetitions of the search
+	 * @param lblCoincidences The label of coincidences
+	 */
+	public void setLblCoincidences(JLabel lblCoincidences) {
+		this.lblCoincidences = lblCoincidences;
 	}
 
 }
