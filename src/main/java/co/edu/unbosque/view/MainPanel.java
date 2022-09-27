@@ -124,7 +124,7 @@ public class MainPanel extends JPanel {
 		
 		showText = new JTextArea();
 		showText.setLineWrap(true);
-
+		showText.setEditable(false);
 		showText.setFont(new Font("Century Gothic", Font.BOLD, 12));
 		add(showText);
 
@@ -176,7 +176,7 @@ public class MainPanel extends JPanel {
 
 	/**
 	 * Method that searches in the file the character(s) selected
-	 * 
+	 * @deprecated
 	 * @param file   String of the file selected
 	 * @param search String of the character(s) that will be showed
 	 * @return An unidimensional array that already searched the character(s)
