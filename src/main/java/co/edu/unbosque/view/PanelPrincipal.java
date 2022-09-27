@@ -1,9 +1,9 @@
 package co.edu.unbosque.view;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.io.File;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -17,16 +17,20 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.Highlighter;
+import javax.swing.text.Highlighter.HighlightPainter;
 
 public class PanelPrincipal extends JPanel{
 	
+	private static final long serialVersionUID = 3975846491697319807L;
 	private JButton btnImportFile, btnSearch;
 	private JTextField text;
 	private JTextArea showText;
 	private JLabel lblEnterText, lblSelect;
 	private JRadioButton radioKMB, radioBM;
 	private Image background;
-
+	private Highlighter high;
+	private HighlightPainter paint;
 	
 	PanelPrincipal(){
 		
@@ -67,6 +71,7 @@ public class PanelPrincipal extends JPanel{
 		ButtonGroup optionAlgorithm = new ButtonGroup();
 		optionAlgorithm.add(radioKMB);
 		optionAlgorithm.add(radioBM);
+	
 		
 		showText = new JTextArea();
 		showText.setBounds(30,80,770,350);
@@ -101,109 +106,112 @@ public class PanelPrincipal extends JPanel{
 		add(btnSearch);
 		
         Border bordejpanel = new TitledBorder(new EtchedBorder(), "Search Text");
-        setBorder(bordejpanel);
-        
-		
+        setBorder(bordejpanel);	
 	}
 	
-	public void paintComponent(Graphics g) {
-		int width = this.getSize().width;
-		int height = this.getSize().height;
-		if (this.background != null) {
-			g.drawImage(this.background, 0, 0, width, height, null);
+	public String [] estados(String file, String search) {
+		String estados [] = new String [2];
+		boolean kmp = radioKMB.isSelected();
+		boolean bm = radioBM.isSelected();
+		if(!kmp && !bm) {
+			return null;
+		}else if(new File(file) != null) {
+			estados[0] = kmp? "KMP" : "BM";
+			estados[1] = search;	
 		}
+		return estados;
+	}
+	
+	public void paintText(String chars [], int size) {
+		high.removeAllHighlights();
+		try {
+			for(int i = 1; i < chars.length; i++) {
+				high.addHighlight(Integer.parseInt(chars[i]), Integer.parseInt(chars[i]) +size, paint);
+				showText.setCaretPosition(Integer.parseInt(chars[i]) +size);
+			}
+		}catch(Exception error) {
+			error.printStackTrace();
+		}
+	}
+	
+	
+	public void paintComponent(Graphics g) {
+		int width = getSize().width;
+		int height = getSize().height;
+		if (this.background != null) 
+			g.drawImage(this.background, 0, 0, width, height, null);
 		super.paintComponent(g);
 	}
 
 	
 	public void setBackground() {
-		this.setOpaque(false);
-		this.background = new ImageIcon("src/main/resources/2.jpg").getImage();
+		setOpaque(false);
+		background = new ImageIcon("src/main/resources/2.jpg").getImage();
 		repaint();
 	}
-
 
 
 	public JButton getBtnImportFile() {
 		return btnImportFile;
 	}
 
-
 	public void setBtnImportFile(JButton btnImportFile) {
 		this.btnImportFile = btnImportFile;
 	}
-
 
 	public JButton getBtnSearch() {
 		return btnSearch;
 	}
 
-
 	public void setBtnSearch(JButton btnSearch) {
 		this.btnSearch = btnSearch;
 	}
-
 
 	public JTextField getText() {
 		return text;
 	}
 
-
 	public void setText(JTextField text) {
 		this.text = text;
 	}
-
 
 	public JTextArea getShowText() {
 		return showText;
 	}
 
-
 	public void setShowText(JTextArea showText) {
 		this.showText = showText;
 	}
-
 
 	public JLabel getLblEnterText() {
 		return lblEnterText;
 	}
 
-
 	public void setLblEnterText(JLabel lblEnterText) {
 		this.lblEnterText = lblEnterText;
 	}
-
 
 	public JLabel getLblSelect() {
 		return lblSelect;
 	}
 
-
 	public void setLblSelect(JLabel lblSelect) {
 		this.lblSelect = lblSelect;
 	}
-
 
 	public JRadioButton getRadioKMB() {
 		return radioKMB;
 	}
 
-
 	public void setRadioKMB(JRadioButton radioKMB) {
 		this.radioKMB = radioKMB;
 	}
-
 
 	public JRadioButton getRadioBM() {
 		return radioBM;
 	}
 
-
 	public void setRadioBM(JRadioButton radioBM) {
 		this.radioBM = radioBM;
-	}
-
-	
-	
-	
+	}	
 }

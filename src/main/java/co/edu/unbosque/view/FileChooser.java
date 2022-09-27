@@ -1,5 +1,4 @@
 package co.edu.unbosque.view;
-
 import java.io.File;
 
 import javax.swing.JFileChooser;
@@ -9,6 +8,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class FileChooser extends JPanel{
 
+	private static final long serialVersionUID = 7533942115625784030L;
 	private JFileChooser jf;
 	private FileNameExtensionFilter filter;
 	
@@ -19,6 +19,11 @@ public class FileChooser extends JPanel{
 		jf.setFileFilter(filter);
 	}
 	
+	/**
+	 * Se puede eliminar este while ya que es incomodo tener un JFileChooser cada vez que
+	 * no se selecciona un archivos
+	 * @return 
+	 */
 	public File checkFile() {
 		File f = jf.getSelectedFile();
 		while (f == null) {
