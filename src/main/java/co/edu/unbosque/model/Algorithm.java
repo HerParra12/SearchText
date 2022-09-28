@@ -24,8 +24,6 @@ public class Algorithm {
 	 */
 	public String kmpAlgorithm(String text, String search) {
 		StringBuilder builder = new StringBuilder();
-//		text = text.toLowerCase();
-//		search = search.toLowerCase();
 		int nums [] = new int [search.length()];
 		nextPosition(search, nums);
 		int counter = 0;
@@ -49,8 +47,6 @@ public class Algorithm {
 	public String bmAlgorithm(String text, String search) {
 		StringBuilder builder = new StringBuilder();
 		int chars [] = new int [256];
-//		text = text.toLowerCase();
-//		search = search.toLowerCase();
 		setValues(search, chars);
 		int counter = 0;
 		int index = 0;
