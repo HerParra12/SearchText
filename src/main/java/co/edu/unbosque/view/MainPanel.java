@@ -183,7 +183,7 @@ public class MainPanel extends JPanel {
 		optionsSearch.setBounds(180, 500, 180, 30);
 		optionsSearch.setFont(new Font("Century Gothic", Font.BOLD, 12));
 		optionsSearch.addItem("Select a type of search");
-		optionsSearch.addItem("Capitar letter");
+		optionsSearch.addItem("Capital letter");
 		optionsSearch.addItem("Lower case letter");
 		optionsSearch.addItem("Without distinction");
 		optionsSearch.setVisible(false);

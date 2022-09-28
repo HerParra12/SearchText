@@ -108,7 +108,7 @@ public class Controller implements ActionListener {
 		String chars[];
 		String status = view.getPanelMain().getOptionsSearch().getSelectedItem().toString();
 		if (algorithm.equals("KMP")) {
-			if (status.equals("Capitar letter"))
+			if (status.equals("Capital letter"))
 				search = search.toUpperCase();
 			if (status.equals("Lower case letter"))
 				search = search.toLowerCase();
@@ -119,7 +119,7 @@ public class Controller implements ActionListener {
 			chars = model.kmpAlgorithm(content, search).split(",");
 
 		} else {
-			if (status.equals("Capitar letter"))
+			if (status.equals("Capital letter"))
 				search = search.toUpperCase();
 			if (status.equals("Lower case letter"))
 				search = search.toLowerCase();
