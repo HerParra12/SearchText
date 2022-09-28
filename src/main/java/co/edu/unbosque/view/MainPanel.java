@@ -14,6 +14,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -76,6 +77,11 @@ public class MainPanel extends JPanel {
 	 * Variable that allows the movement in the field where the program shows the .txt file
 	 */
 	private JScrollPane barraSalida;
+
+	/**
+	 * Variable that allows to select the type of search(Capital letter, lower case letter, without distinction)
+	 */
+	private JComboBox optionsSearch;
 
 	/**
 	 * The constructor of the clase, it contains the different configurations of the
@@ -167,12 +173,22 @@ public class MainPanel extends JPanel {
 		add(lblEnterText);
 
 		btnSearch = new JButton("Search");
-		btnSearch.setBounds(285, 500, 90, 30);
+		btnSearch.setBounds(390, 500, 90, 30);
 		btnSearch.setFont(new Font("Century Gothic", Font.BOLD, 12));
 		btnSearch.setActionCommand("SEARCH");
 		btnSearch.setVisible(false);
 		add(btnSearch);
-
+		
+		optionsSearch = new JComboBox<String>();
+		optionsSearch.setBounds(180, 500, 180, 30);
+		optionsSearch.setFont(new Font("Century Gothic", Font.BOLD, 12));
+		optionsSearch.addItem("Select a type of search");
+		optionsSearch.addItem("Capitar letter");
+		optionsSearch.addItem("Lower case letter");
+		optionsSearch.addItem("Without distinction");
+		optionsSearch.setVisible(false);
+		add(optionsSearch);
+		
 		Border bordejpanel = new TitledBorder(new EtchedBorder(), "               ");
 		setBorder(bordejpanel);
 
@@ -431,4 +447,13 @@ public class MainPanel extends JPanel {
 		this.lblCoincidences = lblCoincidences;
 	}
 
+	public JComboBox getOptionsSearch() {
+		return optionsSearch;
+	}
+
+	public void setOptionsSearch(JComboBox optionsSearch) {
+		this.optionsSearch = optionsSearch;
+	}
+
+	
 }

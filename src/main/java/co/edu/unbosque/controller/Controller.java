@@ -69,15 +69,20 @@ public class Controller implements ActionListener{
 			view.getPanelMain().getLblSelect().setVisible(true);
 			view.getPanelMain().getRectangle().setVisible(true);
 			view.getPanelMain().getBarraSalida().setVisible(true);
+			view.getPanelMain().getOptionsSearch().setVisible(true);
 		
 		}else if(comand.equals("SEARCH")) {
 			String search = view.getPanelMain().getText().getText();
 			text = persistence.contentText(view.getRuta());
 			if(!search.isEmpty()) {
 				String estados = view.getPanelMain().estados();
-				if(estados != null) 
+				if(estados != null) {
 					paintText(text, estados, search);
-				else 
+					
+					
+					System.out.println(view.getPanelMain().getOptionsSearch().getSelectedItem().toString());
+					
+				}else 
 					view.warningMessage("Debes seleccionar un algoritmo");
 			}else {
 				view.warningMessage("Debes ingresar un texto para buscar.");
