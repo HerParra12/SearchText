@@ -40,6 +40,7 @@ public class Algorithm {
 		 *  1 + 1 + 3 + 9N + 1 + 1 + 4 + 8J + (4 + 8J) * N + (4 + 8J) * N + (4 + 8J) * N + N + 1 
 		 *  8J + 9N + 11 + 3N (4+8J) + N + 1
 		 *  8J + 10 N + 12 + 3N (4 + 8J)
+		 *  Big O (N^2)
 		 */
 	}
 	
@@ -57,16 +58,16 @@ public class Algorithm {
 		setValues(search, chars); // 4N + 4
 		int counter = 0; // 1
 		int index = 0; // 1
-		while(bm(text, search, chars, index) != -1) { // (2N + (N * 3N + 5) + 2) + 1
-			builder.append(bm(text, search, chars, index) + ","); // (2N + (N * 3N + 5) + 2) * N
-			index = bm(text, search, chars, index) +1; // (2N + (N * 3N + 5) + 2) * N
-			bm(text, search, chars, index); // (2N + (N * 3N + 5) + 2) * N
+		while(bm(text, search, chars, index) != -1) { // (2 + N + ((2N + 2) * 3N + 5)) + 1
+			builder.append(bm(text, search, chars, index) + ","); // (2 + N + ((2N + 2) * 3N + 5)) * N
+			index = bm(text, search, chars, index) +1; // (2 + N + ((2N + 2) * 3N + 5)) * N
+			bm(text, search, chars, index); // (2 + N + ((2N + 2) * 3N + 5)) * N
 			counter ++; // N
 		}
 		return counter + "," + builder.toString(); // 1
 		// 1 + 1 + 4N + 4 + 1 + 1 + (2N + (N * 3N + 5) + 2) + 1 + (3N * (2N + (N * 3N + 5) + 2)) + N + 1
-		// 5N + (2N + (LOG N * 3N + 5) + 2) + (3N * (2N + (N * 3N + 5) + 2)) +  10 
-		// Big o (N^2)
+		// 5N + (2N + (N * 3N + 5) + 2) + (3N * (2N + (N * 3N + 5) + 2)) +  10 
+		// Big o (N^2) 
 	}
 	
 	
@@ -106,12 +107,12 @@ public class Algorithm {
 	 */
 	public int bm(String text, String search, int chars [], int index) {
 		int skip; // 1
-		for(int i = index; i < text.length() - search.length(); i += skip) { // N
+		for(int i = index; i < text.length() - search.length(); i += skip) { // 1 + N + 1 + N -> (2N + 2)
 			skip = 0; // N
 			for(int j = search.length() -1; j >= 0; j--) { // 1 + N +1 + N -> 2N + 2
 				if(search.charAt(j) != text.charAt(i + j)) { // N
-					skip = j - chars[text.charAt(i + j)]; // 1
-					skip = skip < 1? 1 : skip; // 1
+					skip = j - chars[text.charAt(i + j)]; // N
+					skip = skip < 1? 1 : skip; // N
 					break; 
 				}
 			}
@@ -119,7 +120,7 @@ public class Algorithm {
 			if(skip == 0) return i; // N
 		}
 		return -1; // 1
-		// 1 + (N * 3N + 5) + N +  N + 1 -> 2N + (N * 3N + 5) + 2
+		// 1 + (2N + 2 * 3N + 5) + N + 1 -> 2 + N + ((2N + 2) * 3N + 5) 
 	}
 	
 	/**
